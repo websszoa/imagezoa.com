@@ -93,6 +93,7 @@ npx shadcn@latest add sidebar
 npx shadcn@latest add input-otp
 npx shadcn@latest add table
 npx shadcn@latest add dialog
+npx shadcn@latest add avatar
 ```
 
 ## 인증 시스템

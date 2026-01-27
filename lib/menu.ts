@@ -1,0 +1,113 @@
+import {
+  LucideIcon,
+  Home,
+  Newspaper,
+  Rat,
+  Grip,
+  BadgeDollarSign,
+  Compass,
+  Drama,
+  Star,
+  User,
+  Gem,
+  BookImage,
+  Flower,
+  Cable,
+  Gamepad2,
+  Image,
+} from "lucide-react";
+
+export interface HeaderMenuItem {
+  label: string;
+  href: string;
+}
+
+export interface MenuItem {
+  icon: LucideIcon;
+  label: string;
+  href: string;
+}
+
+export interface FooterColumnMenu {
+  title: string;
+  items: { label: string; href: string }[];
+}
+
+// 헤더 메뉴
+export const headerMenuItems: HeaderMenuItem[] = [
+  { label: "생성하기", href: "/" },
+  { label: "갤러리", href: "/gallery" },
+  { label: "요금제", href: "/price" },
+  { label: "문의하기", href: "/contact" },
+];
+
+// 모바일 메뉴
+export const mobileMenuItems: MenuItem[] = [
+  { icon: Home, label: "홈", href: "/" },
+  { icon: Newspaper, label: "공지사항", href: "/notice" },
+  { icon: Rat, label: "문의하기", href: "/contact" },
+  { icon: Grip, label: "더보기", href: "#more" },
+];
+
+// 기본 메뉴
+export const basicMenuItems: MenuItem[] = [
+  { icon: Home, label: "홈", href: "/" },
+  { icon: Newspaper, label: "공지사항", href: "/notice" },
+  { icon: Rat, label: "문의하기", href: "/contact" },
+  { icon: Compass, label: "이용약관", href: "/terms" },
+  { icon: Drama, label: "개인정보취급방침", href: "/privacy" },
+];
+
+// 로그인 했을 때
+export const userMenuItems: MenuItem[] = [
+  { icon: User, label: "프로필", href: "/profile" },
+  { icon: Flower, label: "나의갤러리", href: "/my-gallery" },
+  { icon: Star, label: "즐겨찾기", href: "/favorites" },
+  { icon: Gem, label: "관리자", href: "/admin" },
+];
+
+// 로그인 안 했을 때
+export const guestMenuItems: MenuItem[] = [
+  { icon: User, label: "프로필", href: "/profile" },
+  { icon: Flower, label: "나의갤러리", href: "/my-gallery" },
+  { icon: Star, label: "즐겨찾기", href: "/favorites" },
+  { icon: BookImage, label: "갤러리", href: "/gallery" },
+  { icon: BadgeDollarSign, label: "요금제", href: "/price" },
+];
+
+// 푸터 컬럼 메뉴
+export const footerColumnMenus: FooterColumnMenu[] = [
+  {
+    title: "페이지",
+    items: [
+      { label: "이미지 생성", href: "/" },
+      { label: "갤러리", href: "/gallery" },
+      { label: "가격보기", href: "/price" },
+    ],
+  },
+  {
+    title: "서비스",
+    items: [
+      { label: "공지사항", href: "/notice" },
+      { label: "문의하기", href: "/contact" },
+      { label: "인스타그램", href: "/instagram" },
+      { label: "유튜브", href: "/youtube" },
+    ],
+  },
+  {
+    title: "약관 및 정책",
+    items: [
+      { label: "이용약관", href: "/terms" },
+      { label: "개인정보처리방침", href: "/privacy" },
+      { label: "환불 정책", href: "/refund" },
+    ],
+  },
+];
+
+// 관리자 메뉴
+export const adminMenuItems: MenuItem[] = [
+  { icon: Home, label: "대시보드", href: "/admin/dashboard" },
+  { icon: Cable, label: "회원 관리", href: "/admin/users" },
+  { icon: Image, label: "이미지 관리", href: "/admin/images" },
+  { icon: Gamepad2, label: "문의하기", href: "/admin/notice" },
+];
