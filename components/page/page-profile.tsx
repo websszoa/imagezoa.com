@@ -170,7 +170,7 @@ export default function PageProfile({ profile }: PageProfileProps) {
 
         <Separator />
 
-        <div className="pt-2 flex gap-2 justify-center">
+        <div className="md:pt-2 flex gap-2 justify-center">
           <Button
             variant="outline"
             size="sm"

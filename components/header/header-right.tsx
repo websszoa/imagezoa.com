@@ -14,6 +14,7 @@ import HeaderInfo from "./header-info";
 import HeaderUser from "./header-user";
 import HeaderNav from "./header-nav";
 import DialogDeleted from "../dialog/dialog-deleted";
+import DialogWelcome from "../dialog/dialog-welcome";
 
 export default function HeaderRight() {
   const router = useRouter();
@@ -21,12 +22,21 @@ export default function HeaderRight() {
   const { isOpen, setIsOpen } = useSheet();
   const [user, setUser] = useState<User | null>(null);
   const [isDeletedDialogOpen, setIsDeletedDialogOpen] = useState(false);
+  const [isWelcomeDialogOpen, setIsWelcomeDialogOpen] = useState(false);
 
   // URL에서 deleted 파라미터 감지
   useEffect(() => {
     if (searchParams.get("deleted") === "true") {
       setIsDeletedDialogOpen(true);
-      router.replace("/", { scroll: false }); // URL에서 파라미터 제거
+      router.replace("/", { scroll: false });
+    }
+  }, [searchParams, router]);
+
+  // URL에서 welcome 파라미터 감지
+  useEffect(() => {
+    if (searchParams.get("welcome") === "true") {
+      setIsWelcomeDialogOpen(true);
+      router.replace("/", { scroll: false });
     }
   }, [searchParams, router]);
 
@@ -55,7 +65,7 @@ export default function HeaderRight() {
           <Button
             variant="destructive"
             size="icon"
-            className="h-10 w-10 rounded-full hover:bg-brand/90"
+            className="hidden md:flex h-10 w-10 rounded-full hover:bg-brand/90"
           >
             <Citrus />
           </Button>
@@ -79,6 +89,12 @@ export default function HeaderRight() {
       <DialogDeleted
         open={isDeletedDialogOpen}
         onOpenChange={setIsDeletedDialogOpen}
+      />
+
+      {/* 로그인 환영 다이얼로그 */}
+      <DialogWelcome
+        open={isWelcomeDialogOpen}
+        onOpenChange={setIsWelcomeDialogOpen}
       />
     </>
   );

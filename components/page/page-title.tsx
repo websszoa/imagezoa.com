@@ -6,7 +6,7 @@ export default function PageTitle({
   description,
 }: PageTitleProps) {
   return (
-    <div className="page__title">
+    <div className="page__title text-center border-t border-gray-300/20 pt-6 md:pt-8 pb-8 md:pb-12">
       <span className="text-xs font-semibold uppercase tracking-[0.35em] text-brand/80">
         {subtitle}
       </span>

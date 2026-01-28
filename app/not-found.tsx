@@ -14,7 +14,7 @@ export default function NotFound() {
         <div className="flex flex-col items-center justify-center py-12 md:py-20">
           {/* 404 숫자 */}
           <div className="text-center mb-6">
-            <h1 className="font-poppins text-8xl md:text-9xl font-black text-brand/20 select-none">
+            <h1 className="font-paperlogy text-8xl md:text-9xl font-black text-brand/20 select-none">
               404
             </h1>
           </div>
@@ -61,7 +61,7 @@ export default function NotFound() {
           </div>
 
           {/* 추가 안내 */}
-          <div className="mt-12 pt-8 border-t border-gray-200">
+          <div className="mt-10 pt-8 border-t border-gray-200">
             <p className="font-anyvid text-sm text-muted-foreground text-center">
               문제가 지속되면{" "}
               <Link

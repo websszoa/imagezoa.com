@@ -15,6 +15,14 @@ const nextConfig: NextConfig = {
         protocol: "http",
         hostname: "k.kakaocdn.net",
       },
+      {
+        protocol: "https",
+        hostname: "img.imagezoa.com",
+      },
+      {
+        protocol: "https",
+        hostname: "ideogram.ai",
+      },
     ],
   },
 };

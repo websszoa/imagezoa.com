@@ -2,7 +2,7 @@ import { APP_NAME } from "@/lib/constants";
 
 export default function PageTerms() {
   return (
-    <div className="page__policy">
+    <div className="page__policy font-anyvid border border-dashed p-4 pb-4 pt-0 md:p-8 md:pb-8 md:pt-2 border-gray-100 rounded-2xl">
       <h3>제1조 (목적)</h3>
       <p>
         본 약관은 {APP_NAME}(이하 “회사”)가 제공하는 모든 서비스(이하 “서비스”)
@@ -18,8 +18,9 @@ export default function PageTerms() {
           말합니다.
         </li>
         <li>
-          “콘텐츠”란 서비스 내에서 제공되는 마라톤 대회 정보(일정, 장소,
-          주최 정보, 코스 정보 등), 텍스트, 이미지, 데이터 등 일체의 자료를 의미합니다.
+          “콘텐츠”란 서비스 내에서 제공되는 마라톤 대회 정보(일정, 장소, 주최
+          정보, 코스 정보 등), 텍스트, 이미지, 데이터 등 일체의 자료를
+          의미합니다.
         </li>
         <li>
           “아이디(ID)”란 회원 식별 및 서비스 이용을 위해 회원이 설정한 문자와

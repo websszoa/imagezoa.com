@@ -44,3 +44,32 @@ export interface Profile {
   updated_at: string | null;
   deleted_at: string | null;
 }
+
+// 생성된 이미지 데이터 타입 (images)
+export interface GeneratedImage {
+  id: string;
+  user_id: string;
+  image_url: string | null;
+  r2_url: string | null;
+  prompt: string;
+  seed: number | null;
+  aspect_ratio: string | null;
+  rendering_speed: string | null;
+  style_type: string | null;
+  model: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+}
+
+// 문의하기 데이터 타입 (contacts)
+export interface Contact {
+  id: string;
+  user_id: string;
+  message: string;
+  status: "pending" | "in_progress" | "resolved" | "closed";
+  admin_reply: string | null;
+  admin_id: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+  resolved_at: string | null;
+}

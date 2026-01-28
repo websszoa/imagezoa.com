@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { APP_ENG_TITLE } from "@/lib/constants";
 import { House } from "lucide-react";
 
 export function AdminSiteHeader() {
@@ -12,7 +13,7 @@ export function AdminSiteHeader() {
           orientation="vertical"
           className="mx-2 data-[orientation=vertical]:h-4"
         />
-        <h1 className="text-base font-medium">Documents</h1>
+        <h1 className="text-sm font-nanumNeo">{APP_ENG_TITLE}</h1>
         <div className="ml-auto flex items-center gap-2">
           <Button
             variant="link"
@@ -23,7 +24,6 @@ export function AdminSiteHeader() {
             <a
               href="/"
               rel="noopener noreferrer"
-              target="_blank"
               className="dark:text-foreground"
             >
               <House />

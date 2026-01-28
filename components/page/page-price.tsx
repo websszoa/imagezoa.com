@@ -4,7 +4,7 @@ import { Badge } from "../ui/badge";
 
 export default function PagePrice() {
   return (
-    <div className="rounded-lg border border-dashed border-gray-200 py-6 px-4 sm:py-8 sm:px-6 lg:py-14 lg:pb-10 lg:px-8">
+    <div className="rounded-lg border border-dashed border-gray-200 py-4 px-4 sm:py-8 sm:px-6 lg:py-14 lg:pb-10 lg:px-8">
       {/* 플랜 카드 */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
         {/* Free Plan */}

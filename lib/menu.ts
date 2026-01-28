@@ -44,8 +44,8 @@ export const headerMenuItems: HeaderMenuItem[] = [
 // 모바일 메뉴
 export const mobileMenuItems: MenuItem[] = [
   { icon: Home, label: "홈", href: "/" },
-  { icon: Newspaper, label: "공지사항", href: "/notice" },
-  { icon: Rat, label: "문의하기", href: "/contact" },
+  { icon: Newspaper, label: "갤러리", href: "/gallery" },
+  { icon: Rat, label: "요금제", href: "/price" },
   { icon: Grip, label: "더보기", href: "#more" },
 ];
 
@@ -106,8 +106,8 @@ export const footerColumnMenus: FooterColumnMenu[] = [
 
 // 관리자 메뉴
 export const adminMenuItems: MenuItem[] = [
-  { icon: Home, label: "대시보드", href: "/admin/dashboard" },
-  { icon: Cable, label: "회원 관리", href: "/admin/users" },
+  { icon: Home, label: "대시보드", href: "/admin" },
+  { icon: Cable, label: "회원 관리", href: "/admin/member" },
+  { icon: Gamepad2, label: "문의하기", href: "/admin/contact" },
   { icon: Image, label: "이미지 관리", href: "/admin/images" },
-  { icon: Gamepad2, label: "문의하기", href: "/admin/notice" },
 ];

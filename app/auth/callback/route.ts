@@ -19,7 +19,10 @@ export async function GET(request: NextRequest) {
         // 방문 횟수 증가 실패해도 로그인은 계속 진행
         console.error("방문 횟수 증가 오류:", rpcError);
       }
-      return NextResponse.redirect(new URL(next, request.url));
+      // 로그인 성공 시 welcome 파라미터 추가
+      const redirectUrl = new URL(next, request.url);
+      redirectUrl.searchParams.set("welcome", "true");
+      return NextResponse.redirect(redirectUrl);
     }
   }
 

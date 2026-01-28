@@ -1,6 +1,6 @@
 export default function PagePrivacy() {
   return (
-    <div className="page__policy">
+    <div className="page__policy font-anyvid border border-dashed p-4 pb-4 pt-0 md:p-8 md:pb-8 md:pt-2 border-gray-100 rounded-2xl">
       <h3>제1조 (수집하는 개인정보 항목)</h3>
       <ul>
         <li>이름, 이메일 주소, 비밀번호</li>

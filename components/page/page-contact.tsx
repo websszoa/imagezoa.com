@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 import { ContactFormValues } from "@/lib/types";
 import { contactSchema } from "@/lib/validator";
 import { createClient } from "@/lib/supabase/client";
-
+import { faqs } from "@/lib/faq";
 import { Mails, ChevronRight, ChevronDown, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,17 +20,20 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { faqs } from "@/lib/faq";
+import Image from "next/image";
 
 export default function PageContact() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const supabase = createClient();
 
   useEffect(() => {
-    const supabase = createClient();
     supabase.auth.getSession().then(({ data: { session } }) => {
       setIsLoggedIn(!!session?.user);
+      setUserId(session?.user?.id || null);
     });
-  }, []);
+  }, [supabase.auth]);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -38,8 +42,32 @@ export default function PageContact() {
     },
   });
 
+  const onSubmit = async (data: ContactFormValues) => {
+    if (!userId) {
+      toast.error("로그인이 필요합니다.");
+      return;
+    }
+
+    try {
+      const { error } = await supabase.from("contacts").insert({
+        user_id: userId,
+        message: data.message,
+        status: "pending",
+      });
+
+      if (error) throw error;
+
+      toast.success("문의가 성공적으로 접수되었습니다.");
+      form.reset();
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error(error);
+      toast.error("문의 접수 중 오류가 발생했습니다.");
+    }
+  };
+
   return (
-    <div className="rounded-lg border border-dashed border-gray-200 py-6 px-4 sm:py-8 sm:px-6 lg:py-8 lg:px-8">
+    <div className="rounded-lg border border-dashed border-gray-200 py-4 px-4 sm:py-8 sm:px-6 lg:py-8 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
         {/* 왼쪽: FAQ */}
         <div className="space-y-2">
@@ -51,7 +79,9 @@ export default function PageContact() {
               <details className="group">
                 <summary className="list-none [&::-webkit-details-marker]:hidden [&::marker]:hidden">
                   <div className="flex items-center gap-3">
-                    <Badge className="text-xs shrink-0">{faq.category}</Badge>
+                    <Badge className="hidden sm:inline-flex text-xs shrink-0">
+                      {faq.category}
+                    </Badge>
                     <h3 className="text-sm text-muted-foreground sm:text-base transition-colors flex-1">
                       {faq.title}
                     </h3>
@@ -83,39 +113,74 @@ export default function PageContact() {
               </p>
             </div>
           )}
-          <Form {...form}>
-            <form className="space-y-4">
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      메시지 <span className="star">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="문의 내용을 입력해주세요"
-                        rows={10}
-                        className="h-50"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
 
+          {isSubmitted ? (
+            <div className="flex flex-col items-center justify-center h-full min-h-[300px]">
+              <div className="text-center">
+                <div className="w-16 h-16 rounded-full bg-gray-100 mx-auto mb-3 overflow-hidden">
+                  <Image
+                    src="/face/face01.png"
+                    alt="프로필"
+                    width={64}
+                    height={64}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h3 className="text-gray-700 font-nanumNeo text-xl mb-1">
+                  문의가 정상적으로 접수되었습니다.
+                </h3>
+                <p className="text-sm text-muted-foreground font-anyvid mb-4">
+                  빠른 시일 내에 답변드리겠습니다.
+                </p>
+              </div>
               <Button
-                type="submit"
-                size="lg"
-                className="w-full font-anyvid bg-brand text-white hover:bg-brand/90"
+                variant="destructive"
+                className="font-anyvid"
+                onClick={() => setIsSubmitted(false)}
               >
-                <Mails className="w-4 h-4" aria-hidden="true" />
-                {form.formState.isSubmitting ? "전송 중..." : "문의하기"}
+                새 문의 작성
               </Button>
-            </form>
-          </Form>
+            </div>
+          ) : (
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        메시지 <span className="star">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="문의 내용을 입력해주세요"
+                          rows={10}
+                          className="h-50"
+                          disabled={!isLoggedIn}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full font-anyvid bg-brand text-white hover:bg-brand/90"
+                  disabled={!isLoggedIn || form.formState.isSubmitting}
+                >
+                  <Mails className="w-4 h-4" aria-hidden="true" />
+                  {form.formState.isSubmitting ? "전송 중..." : "문의하기"}
+                </Button>
+              </form>
+            </Form>
+          )}
         </div>
       </div>
     </div>

@@ -12,7 +12,8 @@ export default function MobileNav() {
   const pathname = usePathname();
   const { setIsOpen } = useSheet();
 
-  if (!isMobile) return null;
+  // 모바일이 아니거나 관리자 페이지면 숨김
+  if (!isMobile || pathname.startsWith("/admin")) return null;
 
   const handleMoreClick = (e: React.MouseEvent, href: string) => {
     if (href === "#more") {
@@ -38,7 +39,7 @@ export default function MobileNav() {
                 "flex flex-col items-center justify-center gap-1 rounded-lg px-3 py-2 text-xs transition-colors",
                 isActive
                   ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
               <Icon className="h-5 w-5" />
