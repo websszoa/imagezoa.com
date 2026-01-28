@@ -9,7 +9,7 @@ export default function HomeLayout({
   return (
     <>
       <Header />
-      <main className="main__container">{children}</main>
+      <main>{children}</main>
       <Footer />
     </>
   );

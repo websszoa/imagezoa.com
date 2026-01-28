@@ -141,7 +141,7 @@
     @apply max-w-7xl mx-auto px-4 md:px-6 min-h-[calc(100vh-400px)];
   }
   .footer__container {
-    @apply max-w-7xl mx-auto;
+    @apply max-w-7xl mx-auto px-4 md:px-6;
   }
   .mobile__container {
     @apply max-w-[500px] mx-auto border border-gray-200 p-4 md:p-6 rounded-lg;
@@ -182,5 +182,31 @@
       font-size: inherit;
       transform: none;
     }
+  }
+
+  /* 마키 애니메이션 */
+  .animate-marquee-right {
+    animation: marquee-right 300s linear infinite;
+  }
+  .animate-marquee-left {
+    animation: marquee-left 300s linear infinite;
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
